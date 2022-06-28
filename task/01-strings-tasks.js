@@ -22,7 +22,7 @@
  *   '',  'bb'  => 'bb'
  */
 function concatenateStrings(value1, value2) {
-    throw new Error('Not implemented');
+    return value1.concat(value2);
 }
 
 
@@ -38,7 +38,7 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
-    throw new Error('Not implemented');
+    return value.length;
 }
 
 /**
@@ -55,7 +55,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    throw new Error('Not implemented');
+    return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -69,10 +69,8 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+    return value.substring(7,value.length-1);
 }
-
-
 /**
  * Returns a first char of the given string.
  *
@@ -84,7 +82,7 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    throw new Error('Not implemented');
+    return value.charAt(0);
 }
 
 /**
@@ -99,7 +97,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+    return value.trim()
 }
 
 /**
@@ -114,7 +112,11 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+    let str='';
+    for(let i=0;i<count;i++){
+        str+=value;
+    }
+    return str;
 }
 
 /**
@@ -130,7 +132,9 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    const position =str.search(value);
+    let res= str.substring(0,position)+str.substring(position+value.length,str.length);
+    return res.trim();
 }
 
 /**
@@ -145,7 +149,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+    return str.substring(1,str.length-1);
 }
 
 
@@ -160,7 +164,7 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+    return str.toUpperCase();
 }
 
 /**
@@ -174,7 +178,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+    return str.split(';');
 }
 
 /**
@@ -201,7 +205,10 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+   let tl = '┌' + '─'.repeat(width - 2) + '┐\n';
+   let ml = '│' + ' '.repeat(width - 2) + '│\n';
+   let dl = '└' + '─'.repeat(width - 2) + '┘\n';
+   return tl + ml.repeat(height - 2) + dl;
 }
 
 
@@ -221,7 +228,8 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+    const alpha = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM';
+  return str.replace(/[a-z]/gi, ch => alpha[alpha.indexOf(ch) + 13]);
 }
 
 /**
@@ -238,7 +246,11 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    throw new Error('Not implemented');
+    if(typeof value ==='string'){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 
@@ -267,7 +279,34 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-    throw new Error('Not implemented');
+   const ch1=value.charAt(0);
+   const ch2=value.charAt(1);
+   let v1,v2;
+   if(ch2==='♣'){
+       v1=0;
+   }else if(ch2==='♦'){
+       v1=1;
+   }else if(ch2==='♥'){
+      v1=2;
+   }
+   else {
+      v1=3;
+   }
+
+   if(ch1=='A'){
+       v2=0;
+   }else if(ch1=='J'){
+       v2=10;
+   }else if(ch1=='J'){
+    v2=11;
+   }else if(ch1=='J'){
+    v2=12;
+   }else{
+       v2=Number.parseInt(ch1)-1;
+   }
+
+   return v1*13+v2;
+
 }
 
 
